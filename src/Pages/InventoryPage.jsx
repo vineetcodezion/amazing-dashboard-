@@ -107,7 +107,9 @@ const InventoryPage = () => {
                 <>
                   <div className="w-full">
                     <img
-                      src={selectedProduct?.image}
+                      src={
+                        selectedProduct?.image || selectedProduct.images[1].url
+                      }
                       alt={selectedProduct?.name}
                       className="w-[600px] h-[400px] object-cover rounded-lg shadow-lg"
                     />
@@ -149,7 +151,10 @@ const InventoryPage = () => {
                             </span>
                           ))}
                         </li>
-                        <li>Style: {selectedProduct?.fitShape}</li>
+                        <li>
+                          Style:{" "}
+                          {selectedProduct?.fitShape || selectedProduct.fit}
+                        </li>
                         <li>Net Weight: {selectedProduct?.netWeight} g</li>
                       </ul>
                     </div>

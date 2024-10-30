@@ -29,7 +29,7 @@ const CardList = ({ products }) => {
           >
             {/* Image Placeholder */}
             <img
-              src={item.image}
+              src={item.image || item.images[1].url}
               alt={`Item ${item.id}`}
               className="w-20 h-20 rounded-lg object-cover"
             />
