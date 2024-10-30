@@ -11,6 +11,7 @@ import { verifyAuth } from "./Features/auth/AuthSlice";
 import PrivateRoute from "./Components/PrivateRoutes"; // Import PrivateRoute
 import ProtectedRoute from "./Components/ProtectedRoutes"; // Import ProtectedRoute
 import { useEffect } from "react";
+import CreateCategoryPage from "./Pages/CreateCategoryPage";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -79,6 +80,16 @@ const App = () => {
             <PrivateRoute>
               <Layout>
                 <ImageUploadPage />
+              </Layout>
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/category-creation"
+          element={
+            <PrivateRoute>
+              <Layout>
+                <CreateCategoryPage />
               </Layout>
             </PrivateRoute>
           }
