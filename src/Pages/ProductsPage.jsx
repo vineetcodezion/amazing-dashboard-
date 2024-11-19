@@ -1,22 +1,22 @@
-import React, { Fragment, useState } from "react";
-import Sidebar from "../Layouts/Sidebar";
-import Header from "../Layouts/Header";
-import Tabs from "../Components/Tabs";
-import { BiSolidCloudUpload, BiSolidDownload } from "react-icons/bi";
-import SearchBar from "../Components/Search";
-import InventoryTabs from "../Components/InventoryTabs";
-import { Link } from "react-router-dom";
-import FilterComponent from "../Components/Filter";
-import CardList from "../Components/CardList";
-import InventoryTable from "../Components/InventoryTable";
-import { FaHeadphonesAlt } from "react-icons/fa";
-import GridMenu from "../Components/GridMenu";
+import React, { Fragment, useState } from 'react';
+import Sidebar from '../Layouts/Sidebar';
+import Header from '../Layouts/Header';
+import Tabs from '../Components/Tabs';
+import { BiSolidCloudUpload, BiSolidDownload } from 'react-icons/bi';
+import SearchBar from '../Components/Search';
+import InventoryTabs from '../Components/InventoryTabs';
+import { Link } from 'react-router-dom';
+import FilterComponent from '../Components/Filter';
+import CardList from '../Components/CardList';
+import InventoryTable from '../Components/InventoryTable';
+import { FaHeadphonesAlt } from 'react-icons/fa';
+import GridMenu from '../Components/GridMenu';
 
 const ProductsPage = () => {
   const [filteredData, setFilteredData] = useState([]);
 
   const handleFilter = (filters) => {
-    console.log("Filters applied:", filters);
+    console.log('Filters applied:', filters);
     // Apply filter logic here to update `filteredData`
   };
 
@@ -49,7 +49,7 @@ const ProductsPage = () => {
           <div className="flex flex-row items-center justify-between  px-8 pt-1 pb-4 border-b">
             <SearchBar
               className="w-full"
-              placeholder={"Search toys, t-hsirts, sarees...."}
+              placeholder={'Search toys, t-hsirts, sarees....'}
             />
           </div>
 

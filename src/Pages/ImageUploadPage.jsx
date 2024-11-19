@@ -1,22 +1,22 @@
-import React, { Fragment, useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useDropzone } from "react-dropzone";
-import { MdBlock, MdDelete } from "react-icons/md";
-import Header from "../Layouts/Header";
-import { DndProvider, useDrag, useDrop } from "react-dnd";
-import { HTML5Backend } from "react-dnd-html5-backend";
-import axios from "axios";
-import { getImages } from "../Features/Images/ImageSice"; // Make sure this path is correct
+import React, { Fragment, useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useDropzone } from 'react-dropzone';
+import { MdBlock, MdDelete } from 'react-icons/md';
+import Header from '../Layouts/Header';
+import { DndProvider, useDrag, useDrop } from 'react-dnd';
+import { HTML5Backend } from 'react-dnd-html5-backend';
+import axios from 'axios';
+import { getImages } from '../Features/Images/ImageSice'; // Make sure this path is correct
 
 // Define the drag-and-drop item type
-const ItemType = "MediaItem";
+const ItemType = 'MediaItem';
 
 const ImageUploadPage = () => {
   const dispatch = useDispatch();
   const images = useSelector((state) => state.imageAll?.images);
   const [uploadedMedia, setUploadedMedia] = useState([]);
   const [mainMedia, setMainMedia] = useState(null);
-  const [mainType, setMainType] = useState("");
+  const [mainType, setMainType] = useState('');
   const [uploading, setUploading] = useState(false);
   const [progress, setProgress] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
@@ -24,7 +24,7 @@ const ImageUploadPage = () => {
   const onDrop = (acceptedFiles) => {
     const newMedia = acceptedFiles.map((file) => {
       const previewUrl = URL.createObjectURL(file);
-      const fileType = file.type.startsWith("video/") ? "video" : "image";
+      const fileType = file.type.startsWith('video/') ? 'video' : 'image';
       return {
         preview: previewUrl,
         type: fileType,
@@ -56,7 +56,7 @@ const ImageUploadPage = () => {
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,
-    accept: "image/*,video/*",
+    accept: 'image/*,video/*',
     multiple: true,
   });
 
@@ -67,7 +67,7 @@ const ImageUploadPage = () => {
 
     const formData = new FormData();
     uploadedMedia.forEach((media) => {
-      formData.append("zipfile", media.file);
+      formData.append('zipfile', media.file);
     });
 
     const totalFiles = uploadedMedia.length;
@@ -82,11 +82,11 @@ const ImageUploadPage = () => {
       await Promise.all(
         uploadedMedia.map((media) => {
           const singleFormData = new FormData();
-          singleFormData.append("zipfile", media.file);
+          singleFormData.append('zipfile', media.file);
 
           return axios
             .post(
-              "http://localhost:8081/api/v1/images/upload/bulk-upload",
+              'http://localhost:8081/api/v1/images/upload/bulk-upload',
               singleFormData,
               {
                 onUploadProgress: (progressEvent) => {
@@ -103,15 +103,15 @@ const ImageUploadPage = () => {
         })
       );
     } catch (error) {
-      console.error("Error uploading images:", error.message);
+      console.error('Error uploading images:', error.message);
       if (error.response) {
-        console.error("Response data:", error.response.data);
-        console.error("Response status:", error.response.status);
-        console.error("Response headers:", error.response.headers);
+        console.error('Response data:', error.response.data);
+        console.error('Response status:', error.response.status);
+        console.error('Response headers:', error.response.headers);
       } else if (error.request) {
-        console.error("Request made but no response received:", error.request);
+        console.error('Request made but no response received:', error.request);
       } else {
-        console.error("Error message:", error.message);
+        console.error('Error message:', error.message);
       }
     } finally {
       setUploading(false);
@@ -145,12 +145,12 @@ const ImageUploadPage = () => {
             <div
               {...getRootProps()}
               className={`border p-2 w-[80%] flex justify-center items-center border-gray-400 border-dashed h-full rounded-lg ${
-                isDragActive ? "bg-gray-100" : ""
+                isDragActive ? 'bg-gray-100' : ''
               }`}
             >
               <input {...getInputProps()} />
               {mainMedia ? (
-                mainType === "image" ? (
+                mainType === 'image' ? (
                   <img
                     className="rounded-lg w-full h-full object-cover"
                     src={mainMedia}
@@ -221,10 +221,10 @@ const ImageUploadPage = () => {
             onClick={uploadImages}
             disabled={uploading || uploadedMedia.length === 0}
             className={`px-4 py-2 text-white bg-blue-500 rounded-lg ${
-              uploading ? "opacity-50" : ""
+              uploading ? 'opacity-50' : ''
             }`}
           >
-            {uploading ? "Uploading..." : "Upload Images"}
+            {uploading ? 'Uploading...' : 'Upload Images'}
           </button>
         </div>
 

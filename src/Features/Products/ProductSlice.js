@@ -1,14 +1,12 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import axios from 'axios';
 
 // Thunk to fetch products
 export const fetchProducts = createAsyncThunk(
-  "products/fetchProducts",
+  'products/fetchProducts',
   async (_, { rejectWithValue }) => {
     try {
-      const response = await axios.get(
-        "http://localhost:8081/api/v1/admin/products"
-      );
+      const response = await axios.get('http://localhost:8081/api/v1/products');
       return response.data; // Ensure this is the correct structure returned from the API
     } catch (error) {
       return rejectWithValue(error.response.data);
@@ -18,12 +16,12 @@ export const fetchProducts = createAsyncThunk(
 
 // Thunk to update a product
 export const updateProduct = createAsyncThunk(
-  "products/updateProduct",
+  'products/updateProduct',
   async ({ id, productData }, { rejectWithValue }) => {
     try {
-      const token = localStorage.getItem("token");
+      const token = localStorage.getItem('token');
       const response = await axios.patch(
-        `http://localhost:8081/api/v1/admin/products/${id}`,
+        `http://localhost:8081/api/v1/products/${id}`,
         productData,
         {
           headers: {
@@ -40,11 +38,11 @@ export const updateProduct = createAsyncThunk(
 
 // Thunk to delete a product
 export const deleteProduct = createAsyncThunk(
-  "products/deleteProduct",
+  'products/deleteProduct',
   async (id, { rejectWithValue }) => {
     try {
-      const token = localStorage.getItem("token");
-      await axios.delete(`http://localhost:8081/api/v1/admin/products/${id}`, {
+      const token = localStorage.getItem('token');
+      await axios.delete(`http://localhost:8081/api/v1/products/${id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -66,7 +64,7 @@ const initialState = {
 
 // Product slice
 const productSlice = createSlice({
-  name: "products",
+  name: 'products',
   initialState,
   reducers: {
     setSelectedProduct: (state, action) => {
